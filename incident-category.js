@@ -105,7 +105,7 @@ var drawIncidentChart = function() {
         .style("font-size", "12")
         .style("font-weight", "bold")
         .attr("y", 100)
-        .attr("x", plotWidth)
+        .attr("x", plotWidth + 170)
         .style("text-anchor", "start")
         .text("Color pallet");
 
@@ -114,7 +114,7 @@ var drawIncidentChart = function() {
         svg.append("text")
             .style("font-size", "12")
             .attr("y", y += 20)
-            .attr("x", plotWidth)
+            .attr("x", plotWidth + 190)
             .style("text-anchor", "start")
             .text(colorMap.keys()[key]);
     }
@@ -123,7 +123,7 @@ var drawIncidentChart = function() {
     for (key in colorMap.values() ){
         svg.append("rect")
             .attr("y", y += 20)
-            .attr("x", plotWidth)
+            .attr("x", plotWidth + 170)
             .attr("width", 15)
             .attr("height", 15)
             .style("fill",colorMap.values()[key])
