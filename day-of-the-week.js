@@ -1,5 +1,5 @@
 var dayMap = d3.map();
-d3.csv("./data/Police_Department_Incident_Reports__2018_to_Present.csv", myFunction).then(function (d) {
+d3.csv("./data/Police_Department_Incident_Reports__2018_to_Present.csv", loadWeekDays).then(function (d) {
     drawCategoryChart();
 });
 
@@ -168,7 +168,7 @@ var drawCategoryChart = function() {
 
 
 
-function myFunction(row) {
+function loadWeekDays(row) {
 
     let category = row["Incident Category"];
     var day = row["Incident Day of Week"];
