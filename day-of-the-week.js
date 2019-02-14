@@ -13,13 +13,11 @@ var drawBarChart = function() {
 
 
     mapArray.forEach(function (key,value) {
-        console.log(key.value);
         updatedMap.set(key.key,key.value);
 
     });
 
     // get the data to visualize
-    console.log(updatedMap);
 
 
 
