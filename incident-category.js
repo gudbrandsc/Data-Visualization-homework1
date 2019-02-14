@@ -1,6 +1,6 @@
 var mymap = d3.map();
 
-d3.csv("/data/Police_Department_Incident_Reports__2018_to_Present.csv", myFunction).then(function (d) {
+d3.csv("./data/Police_Department_Incident_Reports__2018_to_Present.csv", myFunction).then(function (d) {
     drawIncidentChart();
 });
 
