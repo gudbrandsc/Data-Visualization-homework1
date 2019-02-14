@@ -1,13 +1,13 @@
 var mymap = d3.map();
+
 d3.csv("/data/Police_Department_Incident_Reports__2018_to_Present.csv", myFunction).then(function (d) {
-    drawBarChart();
+    drawIncidentChart();
 });
 
 
-var drawBarChart = function() {
+var drawIncidentChart = function() {
     console.log("Hello");
     let svg = d3.select("body").select("svg#vis1");
-
     let mapArray = mymap.entries().sort((a,b) =>  a.value - b.value);
     let mapArraySize = mapArray.length;
 
@@ -26,6 +26,8 @@ var drawBarChart = function() {
     // get the svg to draw on
 
 
+
+
     let countMin = 0; // always include 0 in a bar chart!
     let countMax = d3.max(count.values());
     let mean = d3.mean(count.values());
@@ -38,8 +40,8 @@ var drawBarChart = function() {
 
     let margin = {
         top:    60,
-        right:  30, // leave space for y-axis
-        bottom: 60, // leave space for x-axis
+        right:  170, // leave space for y-axis
+        bottom: 120, // leave space for x-axis
         left:   150
     };
 
@@ -97,11 +99,67 @@ var drawBarChart = function() {
     var gridlines = d3.axisBottom(countScale)
         .tickFormat("")
         .tickSize(-plotHeight);
+    var colorMap = createColorMap();
+
+    svg.append("text")
+        .style("font-size", "12")
+        .style("font-weight", "bold")
+        .attr("y", 100)
+        .attr("x", 1208)
+        .style("text-anchor", "start")
+        .text("Color pallet");
+
+    var y = 100;
+    for (key in colorMap.keys() ){
+        svg.append("text")
+            .style("font-size", "12")
+            .attr("y", y += 20)
+            .attr("x", 1230)
+            .style("text-anchor", "start")
+            .text(colorMap.keys()[key]);
+    }
+
+    y = 90;
+    for (key in colorMap.values() ){
+        svg.append("rect")
+            .attr("y", y += 20)
+            .attr("x", 1210)
+            .attr("width", 15)
+            .attr("height", 15)
+            .style("fill",colorMap.values()[key])
+
+    }
+
+    svg.append("text")
+        .style("font-size", "14")
+        .attr("y", 550)
+        .attr("x", 10)
+        .style("text-anchor", "start")
+        .style("fill", "#888888")
+        .text("Created by: Gudbrand Schistad");
+
+    svg.append("text")
+        .style("font-size", "14")
+        .attr("y", 570)
+        .attr("x", 10)
+        .style("text-anchor", "start")
+        .style("fill", "#888888")
+        .text("Description: Count of each Incident Category, where x-axis displays Incident Category  and y axis displays the number of incident recorded for each category. The view is filtered on Incident Category");
+
+    svg.append("text")
+        .style("font-size", "14")
+        .attr("y", 585)
+        .attr("x", 10)
+        .style("text-anchor", "start")
+        .style("fill", "#888888")
+        .text("count, which keeps 10 of 47 members.");
+
+
 
     plot.append("g")
         .call(gridlines)
         .attr("color", "#dadada")
-        .attr("transform", "translate(0,485)");
+        .attr("transform", "translate(0,420)");
 
     svg.append("text")
     // .attr("id", "graph-title")
@@ -168,3 +226,17 @@ function myFunction(row) {
 
     return mymap;
 }
+
+function createColorMap() {
+    var colorMap =  d3.map();
+    colorMap.set("count < 400","#FA795B");
+    colorMap.set("400 < count < 650","#F6503A");
+    colorMap.set("650 < count < 800","#C7061A");
+    colorMap.set("800 < count < 4000","#53000C");
+    colorMap.set("count > 4000","#53000C");
+
+    return colorMap;
+}
+
+
+

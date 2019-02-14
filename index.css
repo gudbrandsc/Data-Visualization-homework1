@@ -34,7 +34,7 @@ textarea {
 }
 
 textarea, svg {
-    border: 1px solid gainsboro;
+    border-top: 1px solid gainsboro;
    /* border-radius: 10px;*/
 }
 

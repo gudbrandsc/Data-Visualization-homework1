@@ -1,10 +1,10 @@
 var dayMap = d3.map();
 d3.csv("/data/Police_Department_Incident_Reports__2018_to_Present.csv", myFunction).then(function (d) {
-    drawBarChart();
+    drawCategoryChart();
 });
 
 
-var drawBarChart = function() {
+var drawCategoryChart = function() {
     let svg = d3.select("body").select("svg#vis3");
 
     let mapArray = dayMap.entries().sort((a,b) =>  a.value - b.value);
@@ -37,7 +37,7 @@ var drawBarChart = function() {
     let margin = {
         top:    50,
         right:  30, // leave space for y-axis
-        bottom: 60, // leave space for x-axis
+        bottom: 100, // leave space for x-axis
         left:   160
     };
 
@@ -97,7 +97,23 @@ var drawBarChart = function() {
     plot.append("g")
         .call(gridlines)
         .attr("color", "#dadada")
-        .attr("transform", "translate(0,485)");
+        .attr("transform", "translate(0,430)");
+
+    svg.append("text")
+        .style("font-size", "14")
+        .attr("y", 570)
+        .attr("x", 10)
+        .style("text-anchor", "start")
+        .style("fill", "#888888")
+        .text("Created by: Gudbrand Schistad");
+
+    svg.append("text")
+        .style("font-size", "14")
+        .attr("y", 590)
+        .attr("x", 10)
+        .style("text-anchor", "start")
+        .style("fill", "#888888")
+        .text("Description: Graph that displays the total number of Larceny Theft that was recorded for each day of the week in 2018. ");
 
     svg.append("text")
     // .attr("id", "graph-title")

@@ -6,7 +6,6 @@ d3.csv("./data/Police_Department_Incident_Reports__2018_to_Present.csv", loadDat
 
 
 function loadDataToD3(data) {
-
     var incedentHourParse = d3.timeParse("%H:%m");
 
         var time = incedentHourParse(data["Incident Time"]);
@@ -42,7 +41,7 @@ function drawLineChart() {
     let margin = {
         top:    60,
         right:  15,
-        bottom: 50,
+        bottom: 90,
         left:   60
     };
 
@@ -95,6 +94,25 @@ function drawLineChart() {
     var lineFunction = d3.line()
         .x(function(d) { return hourScale(d.x); })
         .y(function(d) { return countScale(d.y); });
+
+
+    svg.append("text")
+        .style("font-size", "14")
+        .attr("y", 570)
+        .attr("x", 10)
+        .style("text-anchor", "start")
+        .style("fill", "#888888")
+        .text("Created by: Gudbrand Schistad");
+
+    svg.append("text")
+        .style("font-size", "14")
+        .attr("y", 590)
+        .attr("x", 10)
+        .style("text-anchor", "start")
+        .style("fill", "#888888")
+        .text("Description: This graps show the total number of incidents that were reported for each hour. The data is represents all incident reports for 2018. ");
+
+
 
     plot.append("path")
         .attr("d", lineFunction(dataPoints))
